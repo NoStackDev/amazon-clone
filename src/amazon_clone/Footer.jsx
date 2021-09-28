@@ -50,9 +50,12 @@ const Footer = () => {
         </div>
 
         <div className="Footer_bottom">
-          <img src={Amazon} alt="" />
-          <h6>⚫ English ⇳ </h6>
-          <h6>
+          <div lassName="footer-logo">
+            {" "}
+            <img src={Amazon} alt="" />
+          </div>
+          <h6 className="eng-us">⚫ English ⇳ </h6>
+          <h6 className="usdollar">
             <span className="text-white">$</span> USD - U.S. Dollar
           </h6>
           <h6>
@@ -61,7 +64,8 @@ const Footer = () => {
         </div>
       </div>
       <div className="Second_footer">
-        <a href="/"> Conditions of Use</a> <a href="/">Privacy Notice</a> <a href="/">Interest-Based Ads</a>
+        <a href="/"> Conditions of Use</a> <a href="/">Privacy Notice</a>{" "}
+        <a href="/">Interest-Based Ads</a>
         <span>© 1996-2020, Amazon.com, Inc. or its affiliates</span>
       </div>
     </>

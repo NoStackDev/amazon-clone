@@ -1,4 +1,3 @@
-
 /* Login Start */
 
 .Login {
@@ -26,4 +25,16 @@
 .login_area input {
   box-shadow: unset !important;
   border-radius: 0px !important;
+}
+
+.my-2 {
+  text-align: center;
+}
+@media (max-width: 380px) {
+  .Login {
+    overflow: hidden;
+  }
+  .login_area {
+    padding: 10px;
+  }
 }

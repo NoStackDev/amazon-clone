@@ -88,7 +88,7 @@ header .header_search div:hover {
 
 header .header_search_focus::after {
   position: absolute;
-  content: 'ss';
+  content: "ss";
   left: 0px;
   top: 0px;
   width: 100%;
@@ -197,4 +197,36 @@ header .header_bag img {
 }
 .HeaderBottom > b:hover {
   border: 1px solid #eee;
+}
+
+@media (max-width: 800px) {
+  .deliver-to,
+  .returns-order {
+    display: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .covid {
+    display: none;
+  }
+  .HeaderBottom {
+    height: 50px;
+    padding-top: 10px;
+  }
+
+  .HeaderBottom > ul {
+    display: flex;
+    align-items: center;
+  }
+  .all-text {
+    display: none;
+  }
+  #header_search {
+    display: none;
+  }
+
+  .flag {
+    display: none;
+  }
 }

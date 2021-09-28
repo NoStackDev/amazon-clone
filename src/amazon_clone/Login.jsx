@@ -1,26 +1,29 @@
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import AmazonBlack from './assets/images/amazon-black.png';
-import { useContextValue } from './ContextReducer';
-import Loading from './Loading';
-import ValidationMsg from './ValidationMsg';
-import './Login.css';
-import { auth } from './firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import AmazonBlack from "./assets/images/amazon-black.png";
+import { useContextValue } from "./ContextReducer";
+import Loading from "./Loading";
+import ValidationMsg from "./ValidationMsg";
+import "./Login.css";
+import { auth } from "./firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const Login = () => {
   const [state, dispatch] = useContextValue();
   const history = useHistory();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
   const changeHandler = (e) => {
-    if (e.target.id === 'email') {
+    if (e.target.id === "email") {
       setEmail(e.target.value);
       validation(e.target.value, password);
     }
-    if (e.target.id === 'password') {
+    if (e.target.id === "password") {
       setPassword(e.target.value);
       validation(email, e.target.value);
     }
@@ -30,18 +33,17 @@ const Login = () => {
     e.preventDefault();
     const isValid = validation(email, password);
     if (isValid) {
-      dispatch({ type: 'startLoading' });
+      dispatch({ type: "startLoading" });
       signInWithEmailAndPassword(auth, email, password)
-
         .then(() => {
-          dispatch({ type: 'stopLoading' });
+          dispatch({ type: "stopLoading" });
           setTimeout(() => {
-            history.push('/');
+            history.push("/");
           }, 10);
         })
 
         .catch((err) => {
-          dispatch({ type: 'stopLoading' });
+          dispatch({ type: "stopLoading" });
           setTimeout(() => {
             alert(err.message);
           }, 10);
@@ -52,18 +54,17 @@ const Login = () => {
   const signup = () => {
     const isValid = validation(email, password);
     if (isValid) {
-      dispatch({ type: 'startLoading' });
+      dispatch({ type: "startLoading" });
       createUserWithEmailAndPassword(auth, email, password)
-
         .then(() => {
-          dispatch({ type: 'stopLoading' });
+          dispatch({ type: "stopLoading" });
           setTimeout(() => {
-            history.push('/');
+            history.push("/");
           }, 10);
         })
 
         .catch((err) => {
-          dispatch({ type: 'stopLoading' });
+          dispatch({ type: "stopLoading" });
           setTimeout(() => {
             alert(err.message);
           }, 10);
@@ -72,28 +73,28 @@ const Login = () => {
   };
 
   function validation(email, password) {
-    const checkIndex = email.lastIndexOf('.');
+    const checkIndex = email.lastIndexOf(".");
     const createErrors = {};
 
     if (
-      !email.includes('@') ||
-      !email.includes('.') ||
+      !email.includes("@") ||
+      !email.includes(".") ||
       email.length - 1 === checkIndex
     ) {
-      createErrors.email = 'is-invalid';
+      createErrors.email = "is-invalid";
     } else {
-      createErrors.email = 'is-valid';
+      createErrors.email = "is-valid";
     }
 
     if (password.length < 6) {
-      createErrors.password = 'is-invalid';
+      createErrors.password = "is-invalid";
     } else {
-      createErrors.password = 'is-valid';
+      createErrors.password = "is-valid";
     }
     setErrors(createErrors);
 
     return (
-      createErrors.email === 'is-valid' && createErrors.password === 'is-valid'
+      createErrors.email === "is-valid" && createErrors.password === "is-valid"
     );
   }
 
@@ -117,7 +118,7 @@ const Login = () => {
         />
 
         <ValidationMsg
-          isValid={errors.email && errors.email.includes('is-valid')}
+          isValid={errors.email && errors.email.includes("is-valid")}
           errorMessage="a valid email is required"
         />
 
@@ -134,7 +135,7 @@ const Login = () => {
         />
 
         <ValidationMsg
-          isValid={errors.password && errors.password.includes('is-valid')}
+          isValid={errors.password && errors.password.includes("is-valid")}
           errorMessage="a valid password is required (min 6 chars)"
         />
 
@@ -143,8 +144,7 @@ const Login = () => {
         </button>
 
         <p className="my-2">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum ipsa
-          exercitationem doloremque aliquid!
+          Don't have and account? Input your email and password and tap sign up
         </p>
 
         <button type="button" onClick={signup} className="btn-light btn-block">
